@@ -1,27 +1,25 @@
+{{#if isSearch}}
+<section id="search">
+    <h1>Search</h1>
+    <form method="GET" class="form">
+        <input type="text" class="search" name="search" value="{{filter.search}}" placeholder="Title...">
+        <input type="text" name="genre" class="genre" value="{{filter.genre}}" placeholder="Genre...">
+        <input type="number" name="year" class="year" value="{{filter.year}}" placeholder="Year...">
+        <input type="submit" value="search">
+    </form>
+</section>
+{{/if}}
 
-            <section id="catalog">
-                <h1>All Movies</h1>
-                <div class="band">
+<section id="catalog">
+    <h1>All Movies</h1>
+    <div class="band">
 
-                   {{#each movie}}
-                    <div class="flip flip-vertical">
-                        <div class="front">
-                            <img src={{imageUrl}}
-                                alt={{name}}>
-                        </div>
-                        <div class="back">
-                            <h1>{{name}}</h1>
-                            <h2>{{genre}}</h2>
-                            <p>{{description}}</p>
-                            <a href="#" class="details">Details</a>
-                        </div>
-                    </div>
-                    {{/each}}
-
-                    <!-- If there are still no posts in the database display: -->
-                    <!-- <div class="no-posts">
-                        <p class="no-offer">There are no posts yet...</p>
-                    </div> -->
-                </div>
-            </section>
-       
+        {{#each movies}}
+            {{>movie}}
+        {{else}}
+        <div class="no-posts">
+            <p class="no-offer">There are no movies yet...</p>
+        </div>
+        {{/each}}
+    </div>
+</section>
