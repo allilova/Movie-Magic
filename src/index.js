@@ -1,8 +1,10 @@
 import express from "express";
 import handlebars from 'express-handlebars';
 import routs from './routes.js';
+import mongooseInit from "./config/mongooseInit.js";
 
 const app = express();
+mongooseInit();
 
 app.engine('hbs', handlebars.engine({
     extname: 'hbs',
