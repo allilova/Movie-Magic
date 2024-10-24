@@ -1,15 +1,13 @@
 import express from "express";
 import handlebarsInit from "./config/handlebarsInit.js";
+import expressInit from "./config/expressInit.js";
 import routs from './routes.js';
 import mongooseInit from "./config/mongooseInit.js";
 
 const app = express();
 mongooseInit();
 handlebarsInit(app);
-
-
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static('static'));
+expressInit(app);
 
 app.use(routs);
 
