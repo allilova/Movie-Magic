@@ -1,43 +1,34 @@
-import uniqid from 'uniqid';
+import Movie from '../models/Movie.js';
 
-import movieData from '../data/movieData.js';
-import { log } from 'console';
-
-const getAll = async (filter = {}) => {
-    let movies = await movieData.getAll();
+const getAll = (filter = {}) => {
+    let moviesQuery = Movie.find();
 
     if(filter.search){
-        movies = movies.filter(movie => movie.title.toLowerCase().includes(filter.search.toLowerCase()));
+        moviesQuery.find({ title: {$regex: filter.search, $options: 'i'}});
     }
 
     if(filter.genre){
-        movies = movies.filter(movie => movie.genre.toLowerCase() === filter.genre.toLowerCase());
+        moviesQuery.find({ genre: filter.genre.toLowerCase()});
     }
 
     if(filter.year){
-        movies = movies.filter(movie => movie.year === filter.year);
+        moviesQuery.find({year: filter.year });
     }
 
-    return movies;
+    return moviesQuery;
 };
 
-const create = (movie) =>{
-    movie.id = uniqid();
-    movie.rating = Number(movie.rating);
+const create = (movie) => Movie.create(movie);
 
-    return movieData.create(movie);
-};
+const getOne = (movieId) => Movie.findById(movieId).populate('casts.cast'); 
 
-const getOne = async (movieId) => {
-    const movies = await movieData.getAll();
-
-    const resultMovie = movies.find(movie => movie.id == movieId);
-
-    return resultMovie;
+const attach = (movieId, castId, character) => {
+    return Movie.findByIdAndUpdate(movieId, { $push: { casts: {cast: castId, character}}});
 }
 
 export default{
     getAll,
     create,
-    getOne
+    getOne,
+    attach
 }
