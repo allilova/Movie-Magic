@@ -1,16 +1,12 @@
 import express from "express";
-import handlebars from 'express-handlebars';
+import handlebarsInit from "./config/handlebarsInit.js";
 import routs from './routes.js';
 import mongooseInit from "./config/mongooseInit.js";
 
 const app = express();
 mongooseInit();
+handlebarsInit(app);
 
-app.engine('hbs', handlebars.engine({
-    extname: 'hbs',
-}));
-app.set('view engine', 'hbs');
-app.set('views', './src/views');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('static'));
