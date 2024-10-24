@@ -26,7 +26,7 @@ const attach = (movieId, castId, character) => {
     return Movie.findByIdAndUpdate(movieId, { $push: { casts: {cast: castId, character}}});
 }
 
-export default{
+export default {
     getAll,
     create,
     getOne,
