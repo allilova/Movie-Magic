@@ -3,7 +3,7 @@ import validator from "validator";
 
 import authService from '../service/authService.js';
 import { getErrorMessage} from '../utils/errorUtils.js';
-import { emit } from "nodemon";
+
 
 const router = Router();
 
