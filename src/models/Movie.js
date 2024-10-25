@@ -49,7 +49,7 @@ const movieSchema = new Schema({
     },
     imageUrl: {
         type: String,
-        validate: [/^https?:\/\//, 'Invalid image url!'],
+        validate: [/.img.[A-Za-z0-9]+.[A-Za-z0-9]+.[A-Za-z0-9]+/, 'Invalid image url!'],
     },
     casts: [{
         character: {
