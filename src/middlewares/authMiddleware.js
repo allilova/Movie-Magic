@@ -2,14 +2,14 @@ import jwt from '../lib/jwt.js';
 
 import { JWT_SECRET } from '../config/constants.js';
 
-export const authMiddleware = async(req, res, next) =>{
+export const authMiddleware = async (req, res, next) => {
     const token = req.cookies['auth'];
-    if(!token){
+    if (!token) {
         return next();
     }
 
-    try{
-        const decodedToken = await jwt.verify(token, JWT_SECRET);
+    try {
+        const decodedToken = await jwt.verify(token, JWT_SECRET)
 
         const user = {
             _id: decodedToken._id,
@@ -23,18 +23,18 @@ export const authMiddleware = async(req, res, next) =>{
         res.locals.isAuthenticated = true;
 
         return next();
-    }catch(err){
+    } catch (err) {
         console.log(err);
         res.clearCookie('auth');
 
-        res.redirect('/auth/login');
+        res.redirect('/auth/login')
     }
 };
 
-export const isAuth = (req, res, next) =>{
-    if(!req.isAuthenticated){
+export const isAuth = (req, res, next) => {
+    if (!req.isAuthenticated) {
         return res.redirect('/auth/login');
     }
-
+    
     return next();
 }
