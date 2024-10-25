@@ -1,9 +1,9 @@
-import { Schema, model, Types } from "mongoose";
+import { Schema, model, Types } from 'mongoose';
 
 const movieSchema = new Schema({
-    title:{
+    title: {
         type: String,
-        required: [true, 'Movie Title is requires!'],
+        required: [true, 'Movie Title is required!'],
         minLength: 5,
         validate: [/^[A-Za-z0-9 ]+$/, 'Title can contain only alpha numeric characters!'],
     },
@@ -18,19 +18,19 @@ const movieSchema = new Schema({
         type: String,
         minLength: 5,
         validate: [/^[A-Za-z0-9 ]+$/, 'Director can contain only alpha numeric characters!'],
-        required: true,
+        required: true
     },
     year: {
         type: Number,
         required: true,
-        min: [1900, 'Cannot add movies alder than 1900 year!'],
+        min: [1900, 'Cannot add movies older than 1900 year!'],
         max: [2050, 'Cannot add movies after 2050!'],
     },
     rating: {
         type: Number,
         validate: {
-            validator: function (value){
-                if(this.year >= 2000){
+            validator: function (value) {
+                if (this.year >= 2000) {
                     return !!value;
                 }
 
@@ -45,7 +45,7 @@ const movieSchema = new Schema({
         type: String,
         required: true,
         validate: [/^[A-Za-z0-9 ]+$/, 'Description can contain only alpha numeric characters!'],
-        minLength: [20, 'Description should ba at least 20 characters long'],
+        minLength: [20, 'Description should be at least 20 characters long!']
     },
     imageUrl: {
         type: String,
@@ -59,11 +59,11 @@ const movieSchema = new Schema({
         },
         cast: {
             type: Types.ObjectId,
-            ref: 'User',
+            ref: 'Cast'
         },
     }],
     owner: {
-        type: Types. ObjectId,
+        type: Types.ObjectId,
         ref: 'User',
     }
 });

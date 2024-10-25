@@ -11,13 +11,13 @@ const castSchema = new Schema({
         max: 120,
     },
     born: {
-        type: Number,
+        type: String,
         minLength: 10,
         validate: [/^[A-Za-z0-9 ]+$/, 'Born can contain only alpha numeric characters!'],
     },
     imageUrl: {
         type: String,
-        validate: [/^https?:\/\//, 'Invalid image url!'], 
+        validate: [/^https?:\/\//, 'Invalid image url!'],
     },
 });
 
